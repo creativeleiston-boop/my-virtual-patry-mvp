@@ -1,4 +1,5 @@
 
+
 # My Virtual Pantry — MVP Starter
 
 This is a tiny Next.js starter wired for Supabase.
