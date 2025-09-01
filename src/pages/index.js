@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
-// Inline Supabase client (no external imports needed)
+// Inline Supabase client (keeps things simple)
 const url  = process.env.NEXT_PUBLIC_SUPABASE_URL  || '';
 const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const supabase = createClient(url, anon);
@@ -33,21 +33,29 @@ export default function Home() {
 
         {error && <p style={{ color:'#b00020' }}>Error: {error}</p>}
         {!error && !orgs && <p>Loading…</p>}
+
         {!error && orgs && (orgs.length ? (
           <>
             <h3>Organisations</h3>
-            <ul>{orgs.map(o => <li key={o.id}>{o.name} <small style={{color:'#666'}}>({o.slug})</small></li>)}</ul>
+            <ul>
+              {orgs.map(o => (
+                <li key={o.id}>
+                  {o.name} <small style={{ color:'#666' }}>({o.slug})</small>
+                </li>
+              ))}
+            </ul>
             <p>Great! Supabase is connected.</p>
           </>
         ) : (
           <p>No organisations yet. If you ran the schema v2, you should see <b>Creative Leiston</b> here.</p>
         ))}
 
-        <hr style={{margin:'1rem 0'}}/>
+        <hr style={{ margin:'1rem 0' }} />
         <p>Next: we’ll replace this with the full app (Basket, Incoming, Stock Take, Documents).</p>
       </main>
     </div>
   );
 }
+
 
 }
