@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
-import { supabase } from './supabaseClient';
+import { createClient } from '@supabase/supabase-js';
 
-
+// Inline Supabase client (no external imports needed)
+const url  = process.env.NEXT_PUBLIC_SUPABASE_URL  || '';
+const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabase = createClient(url, anon);
 
 export default function Home() {
   const [orgs, setOrgs] = useState(null);
@@ -45,4 +48,6 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
 }
